@@ -1,4 +1,3 @@
-// src/pages/Home.jsx
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import ModernAdSlider from "../components/ModernAdSlider";
@@ -23,9 +22,12 @@ export default function Home() {
   }, []);
 
   if (loading)
-    return <div className="text-center py-10">جاري تحميل المنتجات...</div>;
+    return (
+      <div className="flex items-center justify-center h-screen text-lg font-semibold animate-pulse text-gray-600">
+        Chargement des produits...
+      </div>
+    );
 
-  // إعادة تهيئة فورمات المنتج
   const formatted = products.map((p) => ({
     id: p.id,
     title: p.name,
@@ -37,77 +39,105 @@ export default function Home() {
   }));
 
   return (
-    <div className="bg-gray-50 min-h-screen">
+    <div className="bg-gradient-to-b from-gray-100 to-gray-200 min-h-screen font-sans">
       <Navbar />
 
-      {/* SLIDER الرئيسي */}
-      <div className="mt-2">
-        <ModernAdSlider />
-      </div>
+      <div className="w-full max-w-[1450px] mx-auto px-3 md:px-6">
 
-      {/* Mini Banners */}
-      <div className="grid grid-cols-3 gap-2 p-3">
-        <img src="/ads/free-delivery.jpg" className="rounded-xl" />
-        <img src="/ads/flash-sale.jpg" className="rounded-xl" />
-        <img src="/ads/coupons.jpg" className="rounded-xl" />
-      </div>
+        {/* HERO SECTION */}
+        <div className="mt-4 grid grid-cols-1 lg:grid-cols-4 gap-4">
+          {/* Slider */}
+          <div className="lg:col-span-3 rounded-3xl overflow-hidden shadow-2xl ring-1 ring-black/10">
+            <ModernAdSlider />
+          </div>
 
-      {/* Flash Sales */}
-      <section className="mt-3 bg-[#FFE8E8] p-3 rounded-xl mx-3">
-        <h2 className="text-lg font-bold mb-2">🔥 تخفيضات اليوم (Flash Sale)</h2>
-        <HorizontalProductStrip products={formatted.slice(0, 10)} />
-      </section>
-
-      {/* New Arrivals */}
-      <section className="mt-6 px-3">
-  <div className="max-w-[800px] mx-auto px-2">
-    <h2 className="text-lg font-bold mb-2">🆕 أحدث المنتجات</h2>
-
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2">
-      {formatted.slice(10, 22).map((p) => (
-        <ProductCard key={p.id} {...p} />
-      ))}
-    </div>
-  </div>
-</section>
-
-
-      {/* Categories */}
-      <section className="mt-6 px-3">
-        <h2 className="text-lg font-bold mb-3">📂 التصنيفات</h2>
-        <div className="grid grid-cols-4 gap-2">
-          <div className="bg-white p-3 rounded-xl shadow text-center">دهانات</div>
-          <div className="bg-white p-3 rounded-xl shadow text-center">مواد التنظيف</div>
-          <div className="bg-white p-3 rounded-xl shadow text-center">معدات البناء</div>
-          <div className="bg-white p-3 rounded-xl shadow text-center">الأدوات الكهربائية</div>
+          {/* Side Banners */}
+          <div className="hidden lg:flex flex-col gap-4">
+            <img src="/ads/side1.jpg" className="rounded-3xl shadow-xl hover:scale-[1.02] duration-300" />
+            <img src="/ads/side2.jpg" className="rounded-3xl shadow-xl hover:scale-[1.02] duration-300" />
+          </div>
         </div>
-      </section>
 
-      {/* Best Selling */}
-      <section className="mt-6 px-3">
-        <h2 className="text-lg font-bold mb-2">🏆 الأكثر مبيعًا</h2>
-        <HorizontalProductStrip products={formatted.slice(5, 15)} />
-      </section>
-
-      {/* Large Promo Banner */}
-      <div className="mt-6 px-3">
-        <img src="/ads/big-sale.jpg" className="rounded-2xl shadow" />
-      </div>
-
-      {/* Recommended */}
-      <section className="mt-6 px-3">
-        <h2 className="text-lg font-bold mb-2">✨ قد يعجبك أيضًا</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-6 gap-2">
-          {formatted.map((p) => (
-            <ProductCard key={p.id} {...p} />
+        {/* ICON STRIP */}
+        <div className="grid grid-cols-3 md:grid-cols-6 gap-4 mt-6">
+          {[
+            ["🚚", "Livraison rapide"],
+            ["💳", "Paiement sécurisé"],
+            ["⭐", "Qualité supérieure"],
+            ["🎁", "Offres quotidiennes"],
+            ["📦", "Emballage soigné"],
+            ["💬", "Support 24/7"],
+          ].map(([icon, label]) => (
+            <div
+              key={label}
+              className="bg-white shadow-lg p-4 rounded-2xl flex flex-col items-center text-sm font-semibold hover:shadow-2xl duration-300 cursor-pointer"
+            >
+              <span className="text-3xl">{icon}</span>
+              <span className="mt-1 text-gray-700">{label}</span>
+            </div>
           ))}
         </div>
-      </section>
 
-      {/* FOOTER */}
-      <footer className="mt-10 p-4 bg-black text-white text-center">
-        Ⓒ 2025 Mon Boutique — جميع الحقوق محفوظة
-      </footer>
+        {/* FLASH SALE SECTION */}
+        <section className="mt-10 bg-gradient-to-r from-red-500 to-orange-500 p-6 rounded-3xl shadow-2xl text-white">
+          <h2 className="text-2xl font-extrabold mb-4 tracking-wide">🔥 Promotions exceptionnelles — Offre limitée</h2>
+          <div className="bg-white p-4 rounded-2xl shadow-xl">
+            <HorizontalProductStrip products={formatted.slice(0, 10)} />
+          </div>
+        </section>
+
+        {/* NEW ARRIVALS */}
+        <section className="mt-14">
+          <h2 className="text-2xl font-bold mb-4 text-gray-800">🆕 Nouveautés</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            {formatted.slice(10, 22).map((p) => (
+              <div className="transform hover:-translate-y-1 hover:shadow-2xl duration-300 rounded-2xl">
+                <ProductCard key={p.id} {...p} />
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* PREMIUM CATEGORIES */}
+        <section className="mt-14">
+          <h2 className="text-2xl font-bold mb-5 text-gray-800">📂 Catégories principales</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+            {["Peintures", "Produits de nettoyage", "Matériaux de construction", "Outils électriques", "Maison", "Jardin"].map((cat) => (
+              <div
+                key={cat}
+                className="bg-white p-6 rounded-2xl shadow-xl border border-gray-200 hover:bg-gray-50 text-center font-bold text-gray-700 cursor-pointer hover:scale-[1.05] duration-300"
+              >
+                {cat}
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* BEST SELLERS */}
+        <section className="mt-14">
+          <h2 className="text-2xl font-bold mb-5 text-gray-800">🏆 Meilleures ventes</h2>
+          <div className="bg-white p-4 rounded-2xl shadow-xl">
+            <HorizontalProductStrip products={formatted.slice(5, 15)} />
+          </div>
+        </section>
+
+        {/* LUXURY PROMO BANNER */}
+        <div className="mt-16 rounded-3xl overflow-hidden shadow-2xl">
+          <img src="/ads/big-sale.jpg" className="w-full" />
+        </div>
+
+        {/* YOU MAY ALSO LIKE */}
+        <section className="mt-14">
+          <h2 className="text-2xl font-bold mb-4 text-gray-800">✨ Suggestions pour vous</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            {formatted.map((p) => (
+              <div className="hover:-translate-y-1 duration-300 hover:shadow-2xl rounded-2xl">
+                <ProductCard key={p.id} {...p} />
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
     </div>
   );
 }

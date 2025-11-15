@@ -1,6 +1,6 @@
 // src/pages/Cart.jsx
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from "react-router-dom";
 import {
   ShoppingCart,
   Trash2,
@@ -29,10 +29,11 @@ const formatPrice = (price) => {
 export default function Cart() {
   const { cart, removeFromCart, updateQuantity } = useCart();
   const [coupon, setCoupon] = useState('');
+  const navigate = useNavigate(); // ← ✔ مكانه الصحيح
 
-  // ✅ حسابات السعر المُصلحة: السعر يُعامل كرقم دائمًا
+  // حسابات السعر
   const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-  const discount = 0; // يمكنك تفعيل القسائم لاحقًا
+  const discount = 0;
   const shipping = subtotal > 10000 ? 0 : 1200;
   const total = subtotal - discount + shipping;
 
@@ -71,7 +72,8 @@ export default function Cart() {
         </div>
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* القسم الأيسر: المنتجات */}
+
+          {/* القسم الأيسر */}
           <div className="lg:col-span-2 space-y-6">
             {cart.map(item => (
               <div 
@@ -80,9 +82,9 @@ export default function Cart() {
               >
                 <div className="p-4 flex gap-4">
                   <img
-                  src={item.image_url || item.image || ""}
-                  alt={item.name}
-                  className="w-24 h-24 object-cover rounded-md"
+                    src={item.image_url || item.image || ""}
+                    alt={item.name}
+                    className="w-24 h-24 object-cover rounded-md"
                   />
 
                   <div className="flex-1">
@@ -90,7 +92,7 @@ export default function Cart() {
                     <p className="text-gray-700 mt-1">
                       {item.color && `${item.color} • `}{item.size}
                     </p>
-                    
+
                     <div className="mt-3 flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <button
@@ -109,18 +111,18 @@ export default function Cart() {
                       </div>
 
                       <div className="text-right">
-                        {/* ✅ عرض السعر باستخدام الدالة المُنسّقة */}
                         <div className="font-bold text-gray-900">{formatPrice(item.price)}</div>
                         {item.oldPrice && (
                           <div className="text-sm text-gray-500 line-through mt-1">
-                            {typeof item.oldPrice === 'number' 
-                              ? formatPrice(item.oldPrice) 
+                            {typeof item.oldPrice === 'number'
+                              ? formatPrice(item.oldPrice)
                               : item.oldPrice}
                           </div>
                         )}
                       </div>
                     </div>
                   </div>
+
                   <button
                     onClick={() => removeFromCart(item.id)}
                     className="self-start p-1 text-gray-400 hover:text-red-500"
@@ -131,7 +133,7 @@ export default function Cart() {
               </div>
             ))}
 
-            {/* قسم القسائم */}
+            {/* كود الخصم */}
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
               <h3 className="font-semibold text-gray-900 mb-4">Code promo</h3>
               <div className="flex gap-2">
@@ -152,9 +154,8 @@ export default function Cart() {
             </div>
           </div>
 
-          {/* القسم الأيمن: الملخص */}
+          {/* القسم الأيمن */}
           <div className="space-y-6">
-            {/* ملخص الطلب */}
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
               <h2 className="text-lg font-semibold text-gray-900 mb-4">Résumé de la commande</h2>
               
@@ -179,10 +180,12 @@ export default function Cart() {
                 </div>
               </div>
 
+              {/* زر الذهاب للدفع */}
               <button
-                className="w-full mt-6 bg-yellow-500 hover:bg-yellow-600 text-black font-semibold py-3 rounded-md transition flex items-center justify-center gap-2"
+                onClick={() => navigate("/checkout")}
+                className="w-full mt-6 bg-yellow-500 hover:bg-yellow-600 text-black font-semibold py-3 rounded-md transition flex items-center justify-center"
               >
-                <Package className="w-5 h-5" />
+                <Package className="w-5 h-5 mr-2" />
                 Passer à la caisse
               </button>
 
@@ -198,21 +201,21 @@ export default function Cart() {
               <h3 className="font-semibold text-gray-900 mb-4">Pourquoi acheter chez nous ?</h3>
               <div className="space-y-3">
                 <div className="flex items-start gap-3">
-                  <Truck className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                  <Truck className="w-5 h-5 text-green-600 mt-0.5" />
                   <div>
                     <div className="font-medium">Livraison gratuite</div>
                     <div className="text-sm text-gray-600">Dès 10 000 DA d'achat</div>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <RotateCcw className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
+                  <RotateCcw className="w-5 h-5 text-blue-600 mt-0.5" />
                   <div>
                     <div className="font-medium">Retour gratuit</div>
                     <div className="text-sm text-gray-600">Sous 15 jours</div>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <ShieldCheck className="w-5 h-5 text-purple-600 mt-0.5 flex-shrink-0" />
+                  <ShieldCheck className="w-5 h-5 text-purple-600 mt-0.5" />
                   <div>
                     <div className="font-medium">Paiement sécurisé</div>
                     <div className="text-sm text-gray-600">CB, CIB, Cash+...</div>
@@ -221,7 +224,7 @@ export default function Cart() {
               </div>
             </div>
 
-            {/* منتجات مقترحة */}
+            {/* مقترحات */}
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
               <h3 className="font-semibold text-gray-900 mb-4">Vous aimerez aussi</h3>
               <div className="space-y-4">
@@ -243,6 +246,7 @@ export default function Cart() {
                 ))}
               </div>
             </div>
+
           </div>
         </div>
       )}

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabaseClient";
 import { useNavigate } from "react-router-dom"; // أضف هذا السطر
+import Categories from "../components/Categories";
 
 export default function Products() {
   const [products, setProducts] = useState([]);
@@ -30,18 +31,21 @@ export default function Products() {
       {products.length === 0 ? (
         <p className="text-gray-500">لا توجد منتجات متوفرة حالياً.</p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-0">
           {products.map((p) => (
             <div
               key={p.id}
               className="bg-white rounded-xl shadow-lg p-5 hover:shadow-xl transition border flex flex-col items-center cursor-pointer"
               onClick={() => navigate(`/product/${p.id}`)} // هنا التنقل عند الضغط
             >
-              <img
-                src={p.image_url || "/placeholder.jpg"}
-                alt={p.name}
-                className="w-full h-40 object-cover mb-3 rounded"
-              />
+              <div className="w-full h-56 bg-white rounded-lg overflow-hidden flex items-center justify-center">
+  <img
+    src={p.image_url || "/placeholder.jpg"}
+    alt={p.name}
+    className="w-full h-full object-contain p2"
+  />
+</div>
+
               <h3 className="text-xl font-semibold mb-2">{p.name}</h3>
               <p className="text-gray-700 mb-2">{p.description}</p>
               <div className="flex items-center gap-2 mb-1">

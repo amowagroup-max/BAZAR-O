@@ -15,6 +15,8 @@ import Products from "./pages/Products";
 import Deals from "./pages/Deals";
 import ProductDetail from "./pages/ProductDetail"; // ← أضف هذا السطر
 import ResetPassword from './pages/ResetPassword'; // ✅
+import Checkout from "./pages/Checkout";
+
 
 export default function App() {
   return (
@@ -40,6 +42,7 @@ export default function App() {
             <Route path="/deals" element={<Deals />} />
             <Route path="/product/:id" element={<ProductDetail />} /> {/* ← أضف هذا السطر */}
             <Route path="/reset-password" element={<ResetPassword />} />
+            <Route path="/checkout" element={<Checkout />} />
           </Routes>
         </main>
       </div>
