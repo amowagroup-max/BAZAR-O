@@ -89,10 +89,14 @@ export default function Home() {
         {/* NEW ARRIVALS */}
         <section className="mt-14">
           <h2 className="text-2xl font-bold mb-4 text-gray-800">🆕 Nouveautés</h2>
+
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
             {formatted.slice(10, 22).map((p) => (
-              <div className="transform hover:-translate-y-1 hover:shadow-2xl duration-300 rounded-2xl">
-                <ProductCard key={p.id} {...p} />
+              <div 
+                key={p.id} 
+                className="transform hover:-translate-y-1 hover:shadow-2xl duration-300 rounded-2xl"
+              >
+                <ProductCard {...p} />
               </div>
             ))}
           </div>
@@ -129,14 +133,19 @@ export default function Home() {
         {/* YOU MAY ALSO LIKE */}
         <section className="mt-14">
           <h2 className="text-2xl font-bold mb-4 text-gray-800">✨ Suggestions pour vous</h2>
+
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
             {formatted.map((p) => (
-              <div className="hover:-translate-y-1 duration-300 hover:shadow-2xl rounded-2xl">
-                <ProductCard key={p.id} {...p} />
+              <div 
+                key={p.id} 
+                className="hover:-translate-y-1 duration-300 hover:shadow-2xl rounded-2xl"
+              >
+                <ProductCard {...p} />
               </div>
             ))}
           </div>
         </section>
+
       </div>
     </div>
   );
