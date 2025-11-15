@@ -80,10 +80,11 @@ export default function Cart() {
               >
                 <div className="p-4 flex gap-4">
                   <img
-                    src={item.image}
-                    alt={item.name}
-                    className="w-24 h-24 object-cover rounded-md"
+                  src={item.image_url || item.image || ""}
+                  alt={item.name}
+                  className="w-24 h-24 object-cover rounded-md"
                   />
+
                   <div className="flex-1">
                     <h3 className="font-medium text-gray-900">{item.name}</h3>
                     <p className="text-gray-700 mt-1">

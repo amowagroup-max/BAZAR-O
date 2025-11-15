@@ -48,11 +48,18 @@ export function CartProvider({ children }) {
   }, [cart]);
 
   const addToCart = (product) => {
-    dispatch({ type: "ADD_ITEM", payload: product });
-  };
+  dispatch({
+    type: "ADD_ITEM",
+    payload: {
+      ...product,
+      image_url: product.image_url || product.image || product.img || "", 
+    },
+  });
+};
+
 
   const removeFromCart = (id) => {
-    dispatch({ type: "REMOVE_ITEM", payload: id });
+    dispatch({ type: "REMOVE_ITEM", payload: { id } });
   };
 
   const updateQuantity = (id, quantity) => {
