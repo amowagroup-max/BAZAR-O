@@ -128,25 +128,25 @@ export default function Navbar() {
         </div>
 
         {/* يمين: شعار BAZARO الكبير + أيقونة القائمة */}
-        <div className="flex items-center gap-2">
-          {/* شعار BAZARO — كبير ومميز */}
-          <div className="relative">
-            <img
-              src="/logo.png"
-              alt="BAZARO Logo"
-              className="h-20 w-auto object-contain drop-shadow-md"
-            />
-          </div>
-          
-          {/* أيقونة القائمة الجانبية */}
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="p-1 rounded-full hover:bg-gray-800 transition"
-            aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
-          >
-            <Menu className="w-6 h-6 text-white hover:text-yellow-400" />
-          </button>
-        </div>
+<div className="flex items-center gap-2">
+  {/* شعار BAZARO — كبير ومميز */}
+  <Link to="/" className="relative">
+  <img
+    src="/logo.png"
+    alt="BAZARO Logo"
+    className="h-20 w-auto object-contain drop-shadow-md cursor-pointer"
+  />
+</Link>
+  
+  {/* أيقونة القائمة الجانبية */}
+  <button
+    onClick={() => setMenuOpen(!menuOpen)}
+    className="p-1 rounded-full hover:bg-gray-800 transition"
+    aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
+  >
+    <Menu className="w-6 h-6 text-white hover:text-yellow-400" />
+  </button>
+</div>
       </div>
 
       {/* القائمة الجانبية */}
