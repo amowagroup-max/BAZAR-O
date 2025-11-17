@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 export default function PureImageSlider() {
   const images = [
     "https://scontent.falg7-6.fna.fbcdn.net/v/t39.30808-6/480702446_1168246425094105_6778952893082794391_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=102&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=9QvsG90H_wAQ7kNvwGmVYe8&_nc_oc=Adn5SNz_zOMSxPs7iT8L3lBEGXOufP3x1kScD9RryjTQKgQ686kEarusX5vvEUyMCVM&_nc_zt=23&_nc_ht=scontent.falg7-6.fna&_nc_gid=DJYgSmxJJhcploFL04pdDg&oh=00_AfjVshNm3pBdGSCWkvYFP1Jeo8C4J0MviDeLzpwaaCb8mg&oe=69208A7F",
-    "https://scontent.falg6-1.fna.fbcdn.net/v/t39.30808-6/477039813_601456455988498_8827776879702323137_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=101&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=4T8S1nwo7JAQ7kNvwEzmVu3&_nc_oc=Adnor81iNR0J_Qh3HS1w-I0tjbhnF-56TJI4RzFno3RakZ0A4x7QCzplCdFdxvao6Gk&_nc_zt=23&_nc_ht=scontent.falg6-1.fna&_nc_gid=p22nrc16it9N_h7DUMQktA&oh=00_Afiulv5dv1rydsXFOXq5PCDeFzCbGZu0C7svlVYR-pNAZw&oe=691750BC",
+    "https://scontent.falg7-6.fna.fbcdn.net/v/t39.30808-6/488600952_993754842880671_6088575747716362163_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=p-_3ou0BvF0Q7kNvwHRtfgx&_nc_oc=Adk4khG6x1lcfIlxmeJgi6nuFtYTNM-OCPJcNOhw_o0x_A1oz-BgIOG0mzeqi5F4_mo&_nc_zt=23&_nc_ht=scontent.falg7-6.fna&_nc_gid=S3TAmFSK07-rDm11EmYZ6g&oh=00_AfiEZnsP7aDwNeT3-wQgG-_MIxcu-2pG7GyMMRD8eH9Bsw&oe=69208A85",
   ];
 
   const [index, setIndex] = useState(0);
